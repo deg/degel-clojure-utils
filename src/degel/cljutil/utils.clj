@@ -101,7 +101,7 @@
   (weighted-rand-nth-helper coll weight-fn
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
-(def ^:dynamic *random-object*  (java.util.Random.))
+(def ^:dynamic ^java.util.Random *random-object*  (java.util.Random.))
 
 (defmacro with-random-seed
   "Apply fcn in a dynamic context where repeatable-rand starts with a fixed seed."

@@ -93,7 +93,7 @@
 
 (defmacro current-function-desc []
   "Returns a string, the file, line number,and name of the current Clojure function."
-  `(-> (Throwable.) .getStackTrace first .toString unmangle))
+  `(-> (Throwable.) .getStackTrace first  str unmangle))
 
 (defmacro errmsg [e]
   `(str "Error in " (current-function-desc) ": " (.getMessage ~e)))
