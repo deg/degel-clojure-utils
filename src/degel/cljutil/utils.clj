@@ -121,6 +121,11 @@
  [n]
  (* n (.nextDouble *random-object*)))
 
+(defn repeatable-rand-int
+  "Variant of rand-int that can be reproducibly seeded."
+ [n]
+ (* n (.nextInt *random-object*)))
+
 (defn- weighted-rand-nth-helper
   "Helper function, pulled out just to ease testing. This way we can test the logic here, without
 rand getting in the way."
