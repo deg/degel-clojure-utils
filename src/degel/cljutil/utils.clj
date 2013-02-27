@@ -124,7 +124,7 @@
 (defn repeatable-rand-int
   "Variant of rand-int that can be reproducibly seeded."
  [n]
- (* n (.nextInt *random-object*)))
+ (.nextInt *random-object* n))
 
 (defn- weighted-rand-nth-helper
   "Helper function, pulled out just to ease testing. This way we can test the logic here, without
