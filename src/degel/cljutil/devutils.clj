@@ -109,3 +109,9 @@
   "Marker to flag unimplemented or incomplete functions."
   [msg]
   `(assert false (str "NYI " (current-function-name) ": " ~msg)))
+
+
+(defn r15
+  "Temporary (I hope) helper to bring in dev and debug tools to REPLs in Clojure 1.5"
+  []
+  (apply require clojure.main/repl-requires))
