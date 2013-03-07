@@ -20,7 +20,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-(defproject degel-clojure-utils "0.1.1-SNAPSHOT"
+(defproject degel-clojure-utils "0.1.2"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "MIT License"
