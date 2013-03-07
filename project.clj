@@ -24,7 +24,8 @@
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "MIT License"
-            :url "http://www.opensource.org/licenses/mit-license.php"}
+            :url "http://www.opensource.org/licenses/mit-license.php"
+            :distribution :repo}
 
   :dependencies [;; Clojure itself
                  [org.clojure/clojure "1.5.0"]
