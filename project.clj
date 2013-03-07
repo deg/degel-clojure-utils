@@ -27,6 +27,9 @@
             :url "http://www.opensource.org/licenses/mit-license.php"
             :distribution :repo}
 
+  :repositories {"clojars" {:url "https://clojars.org/degel-clojure-utils"
+                            :username "deg" :password :gpg}}
+
   :dependencies [;; Clojure itself
                  [org.clojure/clojure "1.5.0"]
 
