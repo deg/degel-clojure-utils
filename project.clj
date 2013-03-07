@@ -27,7 +27,7 @@
             :url "http://www.opensource.org/licenses/mit-license.php"}
 
   :dependencies [;; Clojure itself
-                 [org.clojure/clojure "1.4.0"]
+                 [org.clojure/clojure "1.5.0"]
 
                  ;; Dev utilities to trace functions.
                  [org.clojure/tools.trace "0.7.5"]
