@@ -20,7 +20,7 @@
 ;;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-(defproject degel-clojure-utils "0.1.2"
+(defproject degel-clojure-utils "0.1.3"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "MIT License"
@@ -31,7 +31,7 @@
                             :username "deg" :password :gpg}}
 
   :dependencies [;; Clojure itself
-                 [org.clojure/clojure "1.5.0"]
+                 [org.clojure/clojure "1.5.1"]
 
                  ;; Dev utilities to trace functions.
                  [org.clojure/tools.trace "0.7.5"]
@@ -40,7 +40,7 @@
                  [midje "1.4.0"]
 
                  ;; REPL interface for Emacs.
-                 [org.clojure/tools.nrepl "0.2.0-RC2"]]
+                 [org.clojure/tools.nrepl "0.2.3"]]
 
   :profiles {:dev {:plugins [[lein-midje "2.0.4"]
                              [lein-marginalia "0.7.1"]]}}
