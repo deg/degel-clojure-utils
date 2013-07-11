@@ -4,8 +4,13 @@
 .lein-deps-sum
 .lein-failures
 .lein-plugins
+.lein-repl-history
+.repl
 /checkouts
 /classes
 /lib
 /target
+out
 pom.xml
+pom.xml.asc
+
