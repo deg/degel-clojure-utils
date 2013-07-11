@@ -27,7 +27,7 @@
       (match-all [#"1" #"2"] ["1" "2"]) => true)
 (fact "match-all: wrong order"
       (match-all [#"1" #"2"] ["2" "1"]) => false)
-;; These next two fail because I have implemented match-all direclty with map. Perhaps fix someday.
+;; These next two fail because I have implemented match-all directly with map. Perhaps fix someday.
 (future-fact "match-all: too many patterns"
       (match-all [#"1" #"2" #"3"] ["1" "2"]) => false)
 (future-fact "match-all: too many targets"
@@ -39,6 +39,11 @@
       (match-any #".*123.*" ["abc" "xx123xx" "abc"]) => true)
 (fact "match-any: no match"
       (match-any #".*123.*" ["12" "23" "321"]) => false)
+
+
+(fact "heads: simple test"
+      (heads (range 3)) => '([] [0] [0 1] [0 1 2]))
+
 
 (fact "group-results: basic test"
       (group-results identity [:a :a :a :b :b :a :a :a :b :b :b :b])
@@ -52,6 +57,21 @@
 (fact "group-results: square"
       (group-results #(* % %) [2 -2 3 -3 4 5 -6 6])
       => [[4 2] [9 2] [16 1] [25 1] [36 2]])
+
+
+(fact "group-value-by-keys: simple"
+      (group-values-by-keys [[:o 1] [:e 2] [:o 3] [:e 4] [:o 5] [:e 6]]
+                            first second)
+      => '{:e (2 4 6), :o (1 3 5)})
+(fact "group-value-by-keys: ignoring third"
+      (group-values-by-keys [[1 2 3] [4 5 6] [7 8 9] [3 2 1] [6 5 4] [9 8 7]]
+					   second first)
+      => '{2 (1 3), 5 (4 6), 8 (7 9)})
+(fact "group-value-by-keys: complex funcs"
+      (group-values-by-keys [[1 -2 3] [4 -1 6] [7 0 9] [3 1 1] [6 2 4] [9 3 7]]
+                            #(* (second %) (second %))
+                            (juxt first third))
+      => '{0 ([7 9]), 1 ([4 6] [3 1]), 4 ([1 3] [6 4]), 9 ([9 7])})
 
 
 (fact "first-difference: simple test"

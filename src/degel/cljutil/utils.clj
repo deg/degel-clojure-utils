@@ -59,6 +59,17 @@
   [n-or-nil coll]
   ((if n-or-nil (partial take n-or-nil) identity) coll))
 
+
+(defn heads
+  "Return the partial heads of a sequence.
+
+   ex: `(heads (range 3))`
+
+  -> `([] [0] [0 1] [0 1 2])`"
+  [l]
+  (reductions conj [] l))
+
+
 (defn group-results
   "Group a set of results by clustering and counting adjacent results with matching key.
   That is (group-results identity [:a :a :a :b :b :a :a :a :b :b :b :b]) =>
@@ -67,6 +78,21 @@
   (map (juxt first count)
        (partition-by identity
                      (map keyfn results))))
+
+
+(defn group-values-by-keys
+  "Organize a sequence of items, each of which contains a key and a value.
+   All the values with a common key are grouped together into a sequence that is
+   the value of that key in the returned map.
+
+   Perhaps best explained by an example:
+
+   ex: `(group-values-by-keys [[:o 1] [:e 2] [:o 3] [:e 4] [:o 5] [:e 6]])`
+
+   -> ` {:e (2 4 6), :o (1 3 5)}`"
+  [l f-key f-val]
+  (into {} (map (juxt (comp f-key first) #(map f-val %))
+                (partition-by f-key (sort-by f-key l)))))
 
 
 (defn first-difference
@@ -81,13 +107,17 @@
   "Like rand-nth, but gives a weighted probability to each item in the sequence. The weight of each
    is determined by calling weight-fn on the item."
   [coll weight-fn]
-  ;; This code is optimized for a 10% speed gain at the expense of some readability. Unfortunately,
-  ;; this seems to have a negligible effect on the total runtime of the full program. So, I'm not
-  ;; at all certain it is worth keeping this optimization.
+
+  ;; This code is optimized for a 10% speed gain at the expense of some
+  ;; readability. Unfortunately, this seems to have a negligible effect on the
+  ;; total runtime of codachrom. So, I'm not at all certain it is worth
+  ;; keeping this optimization.
   ;; Here is the original code (also, see below):
   ;; (weighted-rand-nth-helper coll weight-fn (rand (reduce + (map weight-fn coll)))))
-  ;; Note that the profiler shows this function to be a hot spot, but it's lying. Actually, I
-  ;; think that the time is coming from reduce forcing the realization of lazy sequences.
+  ;; Note that the profiler shows this function to be a hot spot in codachrom,
+  ;; but it's lying. Actually, I think that the time is coming from reduce
+  ;; forcing the realization of lazy sequences.
+
   (weighted-rand-nth-helper coll weight-fn
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
