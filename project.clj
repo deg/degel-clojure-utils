@@ -36,4 +36,5 @@
                              [lein-marginalia "0.7.1"]]}}
 
   :plugins [[lein-pprint "1.1.1"]
-            [lein-pedantic "0.0.5"]])
+            ;[lein-pedantic "0.0.5"]
+            ])
