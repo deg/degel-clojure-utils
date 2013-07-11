@@ -11,7 +11,9 @@
 
 
 (ns degel.cljutil.devutils
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [cljs.repl.browser]
+            [cemerick.piggieback]))
 
 ;;; Thanks to the many sources and code references I've looked at as
 ;;; I've started learning Clojure. In particular, portions of this
@@ -104,5 +106,14 @@
 
 (defn r15
   "Temporary (I hope) helper to bring in dev and debug tools to REPLs in Clojure 1.5"
-  []
-  (apply require clojure.main/repl-requires))
+  [for]
+  (apply require clojure.main/repl-requires)
+  (condp = for
+    :server "Ready for server code"
+    :client (do
+               (require 'cljs.repl.browser)
+               (println "Use in-ns to switch to cljs buffer's namespace")
+               (cemerick.piggieback/cljs-repl
+                :repl-env (doto (cljs.repl.browser/repl-env :port 9000)
+                            cljs.repl/-setup)))
+    "Unknown arg to r15"))

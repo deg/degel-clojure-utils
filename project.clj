@@ -30,7 +30,11 @@
                  [midje "1.4.0"]
 
                  ;; REPL interface for Emacs.
-                 [org.clojure/tools.nrepl "0.2.3"]]
+                 [org.clojure/tools.nrepl "0.2.3"]
+
+                 ;; For CLJS REPL
+                 [com.cemerick/piggieback "0.0.4"]
+                 ]
 
   :profiles {:dev {:plugins [[lein-midje "2.0.4"]
                              [lein-marginalia "0.7.1"]]}}
