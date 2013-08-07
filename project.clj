@@ -10,7 +10,7 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel-clojure-utils "0.1.5"
+(defproject degel-clojure-utils "0.1.6"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
@@ -33,7 +33,7 @@
                  [org.clojure/tools.nrepl "0.2.3"]
 
                  ;; For CLJS REPL
-                 [com.cemerick/piggieback "0.0.4"]
+                 [com.cemerick/piggieback "0.1.0"]
                  ]
 
   :profiles {:dev {:plugins [[lein-midje "2.0.4"]

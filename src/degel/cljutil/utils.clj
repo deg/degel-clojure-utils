@@ -10,8 +10,9 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(ns degel.cljutil.utils
-  (:require [degel.cljutil.devutils :as dev]))
+(ns degel.cljutil.utils)
+
+
 (defn third
   "Third element of a sequence"
   [x]
@@ -121,8 +122,12 @@
   (weighted-rand-nth-helper coll weight-fn
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
-(def ^:dynamic ^java.util.Random *random-object*  (java.util.Random.))
 
+;; [TODO] Need to get with-random-seed working again, presumably as a
+;; non-macro, since I use it in codachrom. Also need to eliminate "java."
+#_
+(def ^:dynamic ^java.util.Random *random-object*  (java.util.Random.))
+#_
 (defmacro with-random-seed
   "Apply fcn in a dynamic context where repeatable-rand starts with a fixed seed."
   [[seed] & body]
@@ -136,11 +141,13 @@
        ~@body)))
 
 
+#_
 (defn repeatable-rand
   "Variant of rand that can be reproducibly seeded."
  [n]
  (* n (.nextDouble *random-object*)))
 
+#_
 (defn repeatable-rand-int
   "Variant of rand-int that can be reproducibly seeded."
  [n]
@@ -164,6 +171,7 @@ rand getting in the way."
         (recur (- rand-ptr item-weight) rest)))))
 
 
+#_
 (defmacro tee [fcn & body]
   "Apply fcn to the value of body, presumably for side-effect, then return body's value. Useful in many
    debugging and output-generation scenarios."
