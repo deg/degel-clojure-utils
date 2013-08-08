@@ -10,15 +10,15 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel-clojure-utils "0.1.6"
+(defproject degel-clojure-utils "0.1.8"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"
             :distribution :repo}
 
-  :repositories {"clojars" {:url "https://clojars.org/degel-clojure-utils"
-                            :username "deg" :password :gpg}}
+  ;:repositories {"clojars" {:url "https://clojars.org"
+  ;                          :username "deg" :password :gpg}}
 
   :dependencies [;; Clojure itself
                  [org.clojure/clojure "1.5.1"]
