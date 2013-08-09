@@ -123,11 +123,10 @@
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
 
-;; [TODO] Need to get with-random-seed working again, presumably as a
-;; non-macro, since I use it in codachrom. Also need to eliminate "java."
-#_
+#+clj
 (def ^:dynamic ^java.util.Random *random-object*  (java.util.Random.))
-#_
+
+#+clj
 (defmacro with-random-seed
   "Apply fcn in a dynamic context where repeatable-rand starts with a fixed seed."
   [[seed] & body]
@@ -141,13 +140,13 @@
        ~@body)))
 
 
-#_
+#+clj
 (defn repeatable-rand
   "Variant of rand that can be reproducibly seeded."
  [n]
  (* n (.nextDouble *random-object*)))
 
-#_
+#+clj
 (defn repeatable-rand-int
   "Variant of rand-int that can be reproducibly seeded."
  [n]
@@ -171,10 +170,11 @@ rand getting in the way."
         (recur (- rand-ptr item-weight) rest)))))
 
 
-#_
-(defmacro tee [fcn & body]
-  "Apply fcn to the value of body, presumably for side-effect, then return body's value. Useful in many
-   debugging and output-generation scenarios."
-  `(let [rslt# (do ~@body)]
-     (~fcn rslt#)
-     rslt#))
+(defn tee
+  "Apply f-effector to the value of f-body, presumably for
+   side-effect, then return f-body's value. Useful in many debugging
+   and output-generation scenarios."
+    [f-effector f-body]
+    (let [val (f-body)]
+      (f-effector val)
+      val))
