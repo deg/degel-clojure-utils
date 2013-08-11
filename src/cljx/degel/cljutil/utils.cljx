@@ -10,7 +10,8 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(ns degel.cljutil.utils)
+(ns degel.cljutil.utils
+  (:require [cemerick.pprng :as rng]))
 
 
 (defn third
@@ -123,10 +124,9 @@
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
 
-#+clj
-(def ^:dynamic ^java.util.Random *random-object*  (java.util.Random.))
+(def ^:dynamic ;;^java.util.Random
+  *random-object*  (rng/rng))
 
-#+clj
 (defmacro with-random-seed
   "Apply fcn in a dynamic context where repeatable-rand starts with a fixed seed."
   [[seed] & body]
@@ -136,21 +136,19 @@
                                  (java.util.Random.))]
        ;; The first number returned by java.util.Random seems to be confined to
        ;; a very narrow range, almost independent of the seed. So, throw one away.
-       (.nextDouble *random-object*)
+       (rng/double *random-object*)
        ~@body)))
 
 
-#+clj
 (defn repeatable-rand
   "Variant of rand that can be reproducibly seeded."
  [n]
- (* n (.nextDouble *random-object*)))
+ (* n (rng/double *random-object*)))
 
-#+clj
 (defn repeatable-rand-int
   "Variant of rand-int that can be reproducibly seeded."
  [n]
- (.nextInt *random-object* n))
+ (mod (rng/int *random-object*) n))
 
 (defn- weighted-rand-nth-helper
   "Helper function, pulled out just to ease testing. This way we can test the logic here, without

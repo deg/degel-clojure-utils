@@ -26,6 +26,9 @@
                  ;; Dev utilities to trace functions.
                  [org.clojure/tools.trace "0.7.5"]
 
+                 ;; Random number generator for both Clojure and ClojureScript
+                 [com.cemerick/pprng "0.0.1"]
+
                  ;; Unit testing
                  [midje "1.4.0"]
 
