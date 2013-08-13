@@ -109,7 +109,6 @@
   "Like rand-nth, but gives a weighted probability to each item in the sequence. The weight of each
    is determined by calling weight-fn on the item."
   [coll weight-fn]
-
   ;; This code is optimized for a 10% speed gain at the expense of some
   ;; readability. Unfortunately, this seems to have a negligible effect on the
   ;; total runtime of codachrom. So, I'm not at all certain it is worth
@@ -119,25 +118,23 @@
   ;; Note that the profiler shows this function to be a hot spot in codachrom,
   ;; but it's lying. Actually, I think that the time is coming from reduce
   ;; forcing the realization of lazy sequences.
-
   (weighted-rand-nth-helper coll weight-fn
     (repeatable-rand (reduce (fn [^double a b] (+ a ^double (weight-fn b))) 0.0 coll))))
 
 
-(def ^:dynamic ;;^java.util.Random
+(def ^:dynamic ;;^java.util.Random  [TODO] (Does pprng already hint appropriately?)
   *random-object*  (rng/rng))
 
-(defmacro with-random-seed
+(defn with-random-seed
   "Apply fcn in a dynamic context where repeatable-rand starts with a fixed seed."
-  [[seed] & body]
-  `(let [the-seed# ~seed]
-     (binding [*random-object* (if the-seed#
-                                 (java.util.Random. the-seed#)
-                                 (java.util.Random.))]
-       ;; The first number returned by java.util.Random seems to be confined to
-       ;; a very narrow range, almost independent of the seed. So, throw one away.
-       (rng/double *random-object*)
-       ~@body)))
+  [[seed] fcn]
+  (binding [*random-object* (if seed
+                              (rng/rng seed)
+                              (rng/rng))]
+    ;; The first number returned by java.util.Random seems to be confined to
+    ;; a very narrow range, almost independent of the seed. So, throw one away.
+    (rng/double *random-object*)
+    (fcn)))
 
 
 (defn repeatable-rand
@@ -151,14 +148,9 @@
  (mod (rng/int *random-object*) n))
 
 (defn- weighted-rand-nth-helper
-  "Helper function, pulled out just to ease testing. This way we can test the logic here, without
-rand getting in the way."
-  ;; [TODO] I'm not sure this function is always safe, in the face of evil floating point rounding.
-  ;; Needs some real testing, and probably also a fallback strategy.  Maybe just return the last
-  ;; item if we fall off the end of the list.
-  ;;
-  ;; Second line of optimization. Here is the original:
-  ;; [coll weight-fn rand-val]
+  "Helper function, pulled out to ease testing. This way we can test the logic here,
+   without rand getting in the way."
+  ;; Second line of optimization (see above). Original: [coll weight-fn rand-val]
   [coll weight-fn ^double rand-val]
   (loop [rand-ptr rand-val
          [item & rest] (seq coll)]
