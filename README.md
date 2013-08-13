@@ -22,7 +22,7 @@ configuration:
 
 (For more info, see [pprng's
 README](https://github.com/cemerick/pprng) and [this ClojureScript
-issue discussion](http://dev.clojure.org/jira/browse/CLJS-526).
+issue discussion](http://dev.clojure.org/jira/browse/CLJS-526)).
 
 
 
