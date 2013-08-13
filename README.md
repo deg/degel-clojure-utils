@@ -6,7 +6,25 @@ organize and document this mess.  For now, dig in.
 
 ## Usage
 
-TBD
+For the latest version, include `[degel-clojure-utils "0.1.12"]` in your
+`project.clj`.
+
+
+When including this library in a ClojureScript project, note that you
+also need to add the following to the ClojureScript compiler options
+of each `:build` in your
+[lein-cljsbuild](https://github.com/emezeske/lein-cljsbuild)
+configuration:
+
+```clojure
+:libs [""]
+```
+
+(For more info, see [pprng's
+README](https://github.com/cemerick/pprng) and [this ClojureScript
+issue discussion](http://dev.clojure.org/jira/browse/CLJS-526).
+
+
 
 ## License
 
