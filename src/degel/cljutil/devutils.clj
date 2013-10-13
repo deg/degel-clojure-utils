@@ -113,7 +113,18 @@
     :client (do
                (require 'cljs.repl.browser)
                (println "Use in-ns to switch to cljs buffer's namespace")
+               ;; See https://github.com/cemerick/piggieback/blob/master/CHANGES.md
+               ;; Says I should replace following lines with
+               ;;    (cemerick.piggieback/cljs-repl :repl-env (create-some-cljs-repl-env))
+               (cemerick.piggieback/cljs-repl :repl-env (cljs.repl.browser/repl-env :port 9000))
+               #_
                (cemerick.piggieback/cljs-repl
                 :repl-env (doto (cljs.repl.browser/repl-env :port 9000)
                             cljs.repl/-setup)))
     "Unknown arg to r15"))
+
+
+(defn project-version [group-id artifact]
+  (let [path (str "META-INF/leiningen/" group-id "/" artifact "/project.clj")
+        contents (-> path clojure.java.io/resource slurp read-string)]
+    (nth contents 2)))
