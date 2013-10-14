@@ -10,7 +10,7 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel-clojure-utils "0.1.13"
+(defproject degel-clojure-utils "0.1.14-SNAPSHOT"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
@@ -31,6 +31,10 @@
 
                  ;; REPL interface for Emacs.
                  [org.clojure/tools.nrepl "0.2.3"]
+
+                 ;; Ring/Compojure RPC ([TODO] Are these both needed?)
+                 [shoreleave/shoreleave-remote-ring "0.3.0"]
+                 [shoreleave/shoreleave-remote "0.3.0"]
 
                  ;; For CLJS REPL
                  [com.cemerick/piggieback "0.1.0"]]

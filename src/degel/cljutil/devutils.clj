@@ -122,9 +122,3 @@
                 :repl-env (doto (cljs.repl.browser/repl-env :port 9000)
                             cljs.repl/-setup)))
     "Unknown arg to r15"))
-
-
-(defn project-version [group-id artifact]
-  (let [path (str "META-INF/leiningen/" group-id "/" artifact "/project.clj")
-        contents (-> path clojure.java.io/resource slurp read-string)]
-    (nth contents 2)))
