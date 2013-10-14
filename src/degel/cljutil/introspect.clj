@@ -11,14 +11,16 @@
 
 
 (ns degel.cljutil.introspect
-  (:require [shoreleave.middleware.rpc :as rpc]))
+  (:require [trptcolin.versioneer.core :as version]
+            [shoreleave.middleware.rpc :as rpc]
+            [degel.cljutil.devutils :as dev]))
 
 
-(defn get-project-version [group-id artifact]
-  (let [path (str "META-INF/leiningen/" group-id "/" artifact "/project.clj")
-        contents (some-> path clojure.java.io/resource slurp read-string)]
-    (nth contents 2)))
-
-
-(rpc/defremote project-version [group-id artifact]
-  (get-project-version group-id artifact))
+(rpc/defremote project-versions
+  "Return version strings for one or more artifacts in the
+  project. Called with a vector of 2-vectors, each being the group-id
+  and artifact of one component."
+  [projects]
+  (into [] (map (fn [[group-id artifact]]
+                  [group-id artifact (version/get-version group-id artifact)])
+                projects)))

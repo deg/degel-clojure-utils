@@ -29,6 +29,9 @@
                  ;; Unit testing
                  [midje "1.4.0"]
 
+                 ;; Utility to get our version at runtime
+                 [trptcolin/versioneer "0.1.0"]
+
                  ;; REPL interface for Emacs.
                  [org.clojure/tools.nrepl "0.2.3"]
 
