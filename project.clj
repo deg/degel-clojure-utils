@@ -10,8 +10,8 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel-clojure-utils "0.1.16"
-  :description "DEPRECATED: Use degel/degel-clojure-utils. A collection of Clojure utilities and extensions that I have found useful."
+(defproject degel/degel-clojure-utils "0.1.17"
+  :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"
