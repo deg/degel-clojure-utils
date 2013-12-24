@@ -10,7 +10,7 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel/degel-clojure-utils "0.1.17"
+(defproject degel/degel-clojure-utils "0.1.19"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
@@ -24,7 +24,7 @@
                  [org.clojure/tools.trace "0.7.5"]
 
                  ;; Random number generator for both Clojure and ClojureScript
-                 [com.cemerick/pprng "0.0.1"]
+                 [com.cemerick/pprng "0.0.2"]
 
                  ;; Unit testing
                  [midje "1.4.0"]
@@ -40,6 +40,7 @@
                  [shoreleave/shoreleave-remote "0.3.0"]]
 
   :min-lein-version "2.0.0"
+  ;:pedantic? :abort
 
   :main degel.cljutil.main
 
