@@ -10,7 +10,7 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel/degel-clojure-utils "0.1.19"
+(defproject degel/degel-clojure-utils "0.1.20"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
@@ -24,7 +24,10 @@
                  [org.clojure/tools.trace "0.7.5"]
 
                  ;; Random number generator for both Clojure and ClojureScript
-                 [com.cemerick/pprng "0.0.2"]
+                 [com.cemerick/pprng "0.0.2"
+                  ;; [TODO] pprng uses clojure 1.6.0-alpha. We should move up too, but not yet,
+                  ;;        while we fix other problems.
+                  :exclusions [org.clojure/clojure]]
 
                  ;; Unit testing
                  [midje "1.4.0"]
@@ -36,7 +39,10 @@
                  [org.clojure/tools.nrepl "0.2.3"]
 
                  ;; Ring/Compojure RPC ([TODO] Are these both needed?)
-                 [shoreleave/shoreleave-remote-ring "0.3.0"]
+                 [shoreleave/shoreleave-remote-ring "0.3.0"
+                  ;; [TODO] shoreleave-remote-ring uses org.clojure/tools.reader 0.7.0, conflicting
+                  ;; with later versions used, e.g. by pprng (which uses 0.7.10)
+                  :exclusions [org.clojure/tools.reader]]
                  [shoreleave/shoreleave-remote "0.3.0"]]
 
   :min-lein-version "2.0.0"
