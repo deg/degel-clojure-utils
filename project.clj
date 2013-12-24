@@ -39,6 +39,10 @@
                  [shoreleave/shoreleave-remote-ring "0.3.0"]
                  [shoreleave/shoreleave-remote "0.3.0"]]
 
+  :min-lein-version "2.0.0"
+
+  :main degel.cljutil.main
+
   :profiles {:dev {:plugins [[lein-midje "2.0.4"]
                              [lein-marginalia "0.7.1"]]}}
 
