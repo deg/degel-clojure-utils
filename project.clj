@@ -10,7 +10,7 @@
 ;;; You must not remove this notice, or any other, from this software.
 
 
-(defproject degel/degel-clojure-utils "0.1.20"
+(defproject degel/degel-clojure-utils "0.1.21"
   :description "A collection of Clojure utilities and extensions that I have found useful."
   :url "https://github.com/deg/degel-clojure-utils"
   :license {:name "Eclipse Public License"
@@ -30,7 +30,10 @@
                   :exclusions [org.clojure/clojure]]
 
                  ;; Unit testing
-                 [midje "1.4.0"]
+                 ;; [TODO] This version of midje has transitive dependencies on both
+                 ;; joda-time 2.0 and 2.2. Kludge here for now; upgrade when fixed.
+                 [midje "1.6.0" :exclusions [joda-time]]
+                 [joda-time "2.2"]
 
                  ;; Utility to get our version at runtime
                  [trptcolin/versioneer "0.1.0"]
